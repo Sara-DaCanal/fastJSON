@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="ObjectArraySerializerTest" time="0.034" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="ObjectArraySerializerTest" time="0.033" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2021.3.3"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -63,6 +63,6 @@
   <testcase classname="ObjectArraySerializerTest" name="test[0]" time="0"/>
   <testcase classname="ObjectArraySerializerTest" name="test_1[1]" time="0"/>
   <testcase classname="ObjectArraySerializerTest" name="test[1]" time="0"/>
-  <testcase classname="ObjectArraySerializerTest" name="test_1[2]" time="0.001"/>
+  <testcase classname="ObjectArraySerializerTest" name="test_1[2]" time="0"/>
   <testcase classname="ObjectArraySerializerTest" name="test[2]" time="0"/>
 </testsuite>
