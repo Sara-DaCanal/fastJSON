@@ -48,7 +48,7 @@
                             <execution>
                                 <id>report</id>
                                 <goals>
-                                    <goal>report</goal>
+                                    <goal>report-aggregate</goal>
                                 </goals>
                                 <configuration>
                                     <formats>
