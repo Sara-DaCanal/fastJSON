@@ -33,5 +33,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify -Dsonar.coverage.jacoco.xmlReportPaths=
-      ../fastJSON/target/site/jacoco/jacoco.xml -Pcoverage sonar:sona org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Sara-DaCanal_fastJSON
+        run: mvn -B verify -Dsonar.coverage.jacoco.xmlReportPaths=../fastJSON/target/site/jacoco/jacoco.xml -Pcoverage sonar:sona org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Sara-DaCanal_fastJSON
