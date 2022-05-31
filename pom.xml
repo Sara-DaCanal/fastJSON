@@ -67,7 +67,7 @@
 
     <profiles>
         <profile>
-            <id>coverage</id>
+            <id>JaCoCo-coverage</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -133,6 +133,101 @@
                                     <formats>
                                         <format>XML</format>
                                     </formats>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <id>Mac-OS</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+
+                            <execution>
+                                <id>creating reports</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <workingDirectory>${project.basedir}</workingDirectory>
+                                    <executable>java</executable>
+                                    <arguments>
+                                        <argument>-jar</argument>
+                                        <argument>.\jar\jacoco\jacococli.jar</argument>
+                                        <argument>report</argument>
+                                        <argument>.\target\jacoco.exec</argument>
+                                        <argument>--classfiles</argument>
+                                        <argument>.\jar\fastjson-1.2.79.jar</argument>
+                                        <argument>--sourcefiles</argument>
+                                        <argument>.\src\test\java</argument>
+                                        <argument>--html</argument>
+                                        <argument>target</argument>
+                                        <argument>--xml</argument>
+                                        <argument>target\jacoco.xml</argument>
+                                        <argument>--csv</argument>
+                                        <argument>target\jacoco.csv</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>Linux/Unix</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+
+                            <execution>
+                                <id>creating reports</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <workingDirectory>${project.basedir}</workingDirectory>
+                                    <executable>java</executable>
+                                    <arguments>
+                                        <argument>-jar</argument>
+                                        <argument>./jar/jacoco/jacococli.jar</argument>
+                                        <argument>report</argument>
+                                        <argument>./target/jacoco.exec</argument>
+                                        <argument>--classfiles</argument>
+                                        <argument>./jar/fastjson-1.2.79.jar</argument>
+                                        <argument>--sourcefiles</argument>
+                                        <argument>./src/test/java</argument>
+                                        <argument>--html</argument>
+                                        <argument>target</argument>
+                                        <argument>--xml</argument>
+                                        <argument>target/jacoco.xml</argument>
+                                        <argument>--csv</argument>
+                                        <argument>target/jacoco.csv</argument>
+                                    </arguments>
                                 </configuration>
                             </execution>
                         </executions>
