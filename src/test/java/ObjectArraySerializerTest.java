@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -16,53 +18,39 @@ import java.util.Collection;
 public class ObjectArraySerializerTest extends TestCase {
     private Object[] input;
     private String expected;
-    private ObjectArraySerializerTest objectArraySerializerTest;
+    private SerializeWriter out;
 
     public ObjectArraySerializerTest(Object[] input, String expected){
-        this.input = input;
-        this.expected = expected;
+        configure(input,expected);
+    }
+
+    private void configure(Object[] input, String expected){
+        this.input=input;
+        this.expected=expected;
+        this.out = new SerializeWriter(1);
     }
 
     @Parameterized.Parameters
-    public static Collection configure(){
+    public static Collection parameters() throws ParseException {
         return Arrays.asList(new Object[][] {
                 {new Object[] {"a12", "b34"}, "[\"a12\",\"b34\"]"},
                 {new Object[] {}, "[]"},
-                {new Object[] {null, null}, "[null,null]"}
+                {new Object[] {1,1}, "[1,1]"},
+                {new Object[] {1.1,1.1}, "[1.1,1.1]"},
+                //{new Object[] {new Color(255,0,0), new Color(0,255,0)}, "[{r:255,g:0,b:0,alpha:255},{r:0,g:255,b:0,alpha:255}]"},
+                {new Object[] {new SimpleDateFormat("yyyy-MM-dd").parse("2022-01-01"), new SimpleDateFormat("yyyy-MM-dd").parse("2021-02-02")},"[1640991600000,1612220400000]"},
+                {new Object[] {null, null}, "[null,null]"},
+                {null, "null"}
         });
     }
     @Test
-    public void test() throws Exception{
-        SerializeWriter out = new SerializeWriter( 1);
+    public void test(){
         JSONSerializer.write(out, input);
         Assert.assertEquals(expected, out.toString());
     }
 
-  /*  public void test_0() throws Exception {
-        SerializeWriter out = new SerializeWriter(1);
-
-        JSONSerializer.write(out, new Object[] { "a12", "b34" });
-
-        Assert.assertEquals("[\"a12\",\"b34\"]", out.toString());
-    }
-
-    public void test_1() throws Exception {
-        SerializeWriter out = new SerializeWriter(1);
-
-        JSONSerializer.write(out, new Object[] {});
-
-        Assert.assertEquals("[]", out.toString());
-    }
-
-    public void test_2() throws Exception {
-        SerializeWriter out = new SerializeWriter(1);
-
-        JSONSerializer.write(out, new Object[] { null, null });
-
-        Assert.assertEquals("[null,null]", out.toString());
-    }*/
     @Test
-    public void test_1() throws Exception {
+    public void test_1(){
         Assert.assertEquals(expected, JSON.toJSONString(input, false));
     }
 }
